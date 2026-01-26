@@ -5,7 +5,7 @@ function App() {
   const [message, setMessage] = useState('Hello, World! Connected to Oasis');
 
   useEffect(() => {
-    const backendUrl = "http://localhost:8080/api/health"
+    const backendUrl = process.env.REACT_APP_API_URL || "http://localhost:8080/api/health";
 
     fetch(backendUrl)
       .then(response => {
@@ -28,10 +28,10 @@ function App() {
       <header className="App-header">
         <h1>Mind Oasis</h1>
         <p>
-          Walking Skeleton: Oasis Deployment
+          frontend skeleton
         </p>
-        <div style={{ padding: '20px', border: '1px solid #61dafb', borderRadius: '10px' }}/>
-        <p>Back-end Status:<strong>{message}</strong></p>
+        <div style={{ padding: '20px', border: '1px solid #e8edefff', borderRadius: '10px' }}/>
+        <p>Back-end Status:{message}</p>
       </header>
     </div>
   );
