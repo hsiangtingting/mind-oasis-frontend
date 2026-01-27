@@ -14,6 +14,10 @@ const JournalPage = ({ metaphor, onNext }) => {
 
   return (
     <div className="journal-container fade-in">
+    <header className="fade-in">
+        <h1>Reflect & Release</h1>
+        <p>Let your thoughts flow freely. There's no right or wrong way to express yourself.</p>
+    </header>
       <div className="journal-layout">
         <div className="visual-guide">
           <div
@@ -22,8 +26,8 @@ const JournalPage = ({ metaphor, onNext }) => {
           >
             <div className="label-badge">{metaphor.label}</div>
           </div>
-          <h3>Reflect on this Oasis</h3>
-          <p>Let the image guide your thoughts. What does it say to you right now?</p>
+          <h3>How does this image speak to you?</h3>
+          <p>Share your mood, a memory, or just a few words.</p>
         </div>
 
         <div className="input-area">
@@ -39,7 +43,7 @@ const JournalPage = ({ metaphor, onNext }) => {
             onClick={handleSubmit}
             disabled={content.length < 10}
           >
-            Seek Art Resonance
+            Reveal My Art Connection
           </button>
         </div>
       </div>
