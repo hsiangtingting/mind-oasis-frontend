@@ -1,0 +1,112 @@
+.artwork-result-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+  color: #1a4a9e;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+
+.title-underline {
+  height: 3px;
+  background-color: #1a4a9e;
+  width: 60%;
+  margin: 0 auto 40px;
+}
+
+.main-content-card {
+  border: 2px solid #89cff0;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+
+.met-display-section {
+  display: flex;
+  gap: 30px;
+  border: 1px solid #89cff0;
+  padding: 20px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.art-frame {
+  flex: 1;
+  border: 10px solid #5d4037;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+}
+
+.art-frame img {
+  width: 100%;
+  display: block;
+}
+
+.art-details-sidebar {
+  flex: 1;
+  text-align: left;
+}
+
+.met-header {
+  color: #4db8ff;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* 下方細節區 */
+.journal-details-section {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.info-group {
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 80px;
+}
+
+.pink-text {
+  color: #d170b2;
+}
+
+.user-content-box {
+  margin-top: 20px;
+  padding: 15px;
+  border-left: 2px dashed #ccc;
+  color: #555;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.action-btn {
+  width: 80%;
+  max-width: 400px;
+  padding: 15px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  border: 3px solid #1a4a9e;
+  font-weight: bold;
+  cursor: pointer;
+  background: white;
+  color: #1a4a9e;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background: #1a4a9e;
+  color: white;
+}
