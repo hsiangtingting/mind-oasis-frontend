@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import './LandingPage.css';
-import { SELECTED_THEMES } from './constants';
 
 
-const LandingPage = ({ onSelectMetaphor }) => {
+const LandingPage = ({ selectedThemes, onSelectMetaphor }) => {
     const [selectedId, setSelectedId] = useState(null);
 
     const handleNext = () => {
         if (selectedId) {
-    const selected = SELECTED_THEMES.find(m => m.id === selectedId);
-    onSelectMetaphor(selected);
+            const selected = selectedThemes.find(m => m.id === selectedId);
+            onSelectMetaphor(selected);
         }
     };
 
@@ -21,7 +20,7 @@ const LandingPage = ({ onSelectMetaphor }) => {
     </header>
 
     <div className="card-grid">
-        {SELECTED_THEMES.map((item) => (
+        {selectedThemes?.map((item) => (
         <div
             key={item.id}
             className={`metaphor-card ${selectedId === item.id ? 'active' : ''}`}
