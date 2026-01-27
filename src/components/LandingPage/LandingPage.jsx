@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import './LandingPage.css';
 import { METAPHORS } from './constants';
 
+
 const LandingPage = ({ onSelectMetaphor }) => {
     const [selectedId, setSelectedId] = useState(null);
 
     const handleNext = () => {
-    if (selectedId) {
+        if (selectedId) {
     const selected = METAPHORS.find(m => m.id === selectedId);
     onSelectMetaphor(selected);
-    }
-};
+        }
+    };
 
     return (
     <div className="landing-container">
