@@ -23,13 +23,12 @@ h1 {
 
 
 .metaphor-card {
-    height: 200px;
+    position: relative;
+    height: 300px;
     border-radius: 15px;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     cursor: pointer;
-    position: relative;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-    border: 3px solid transparent;
 }
 
 .metaphor-card:hover {
@@ -47,19 +46,47 @@ h1 {
     height: 100%;
     background-size: cover;
     background-position: center;
-    display: flex;
-    align-items: flex-end;
+    transition: transform 0.5s ease;
 }
 
 .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(2px);
-    color: white;
-    font-weight: 500;
-    text-align: left;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 30px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
+
+.overlay span {
+    color: white;
+    font-size: 1.0rem;
+    /* font-weight: bold; */
+    letter-spacing: 1px;
+    transform: translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metaphor-card:hover .overlay,
+.metaphor-card.active .overlay {
+    opacity: 1;
+}
+
+.metaphor-card:hover .overlay span,
+.metaphor-card.active .overlay span {
+    transform: translateY(0);
+}
+
+
+/* .metaphor-card:hover .card-image {
+    transform: scale(1.1);
+} */
 
 .submit-btn {
     margin-top: 60px;
@@ -67,7 +94,7 @@ h1 {
     font-size: 1.1rem;
     border-radius: 30px;
     border: none;
-    background-color: #a29bfe;
+    background-color: #4d4d5a;
     color: white;
     cursor: pointer;
     opacity: 0;
@@ -81,7 +108,7 @@ h1 {
 }
 
 .submit-btn:hover {
-    background-color: #6c5ce7;
+    background-color: #1e1e20;
 }
 
 .fade-in {

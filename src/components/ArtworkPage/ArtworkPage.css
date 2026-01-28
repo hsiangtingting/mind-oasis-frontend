@@ -2,8 +2,8 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
-  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
-  color: #1a4a9e;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #4d4d5a;
 }
 
 .page-title {
@@ -11,12 +11,12 @@
   margin-bottom: 5px;
 }
 
-.title-underline {
+/* .title-underline {
   height: 3px;
   background-color: #1a4a9e;
   width: 60%;
   margin: 0 auto 40px;
-}
+} */
 
 .main-content-card {
   border: 2px solid #89cff0;
@@ -56,7 +56,7 @@
   margin-bottom: 20px;
 }
 
-/* 下方細節區 */
+
 .journal-details-section {
   text-align: left;
   margin-bottom: 40px;
@@ -93,20 +93,18 @@
 }
 
 .action-btn {
-  width: 80%;
-  max-width: 400px;
-  padding: 15px;
-  font-size: 1.5rem;
-  border-radius: 20px;
-  border: 3px solid #1a4a9e;
-  font-weight: bold;
+  margin-top: 30px;
+  padding: 18px;
+  border-radius: 12px;
+  border: none;
+  background-color: #4d4d5a;
+  color: white;
+  font-size: 1.1rem;
   cursor: pointer;
-  background: white;
-  color: #1a4a9e;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
 }
 
 .action-btn:hover {
-  background: #1a4a9e;
-  color: white;
+  background-color: #1e1e20;
+  transform: translateY(-2px);
 }
