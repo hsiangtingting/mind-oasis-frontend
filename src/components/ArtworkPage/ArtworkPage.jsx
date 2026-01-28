@@ -4,57 +4,50 @@ import './ArtworkPage.css';
 const ArtworkPage = ({ journalData, onReset }) => {
   if (!journalData) return <div className="loading">Seeking resonance...</div>;
 
+  const today = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
   return (
-    <div className="artwork-result-page fade-in">
-      <h1 className="page-title">Your Artistic Resonance</h1>
-      <div className="title-underline"></div>
+    <div className="magazine-container fade-in">
 
-      <div className="main-content-card">
+      <header className="magazine-header">
+        <h1 className="page-title">Your Artistic Resonance</h1>
+        <div className="title-divider"></div>
+      </header>
 
-        <div className="met-display-section">
-          <div className="art-frame">
-            <img src={journalData.artworkImageUrl} alt={journalData.artworkTitle} />
-          </div>
-
-          <div className="art-details-sidebar">
-            <h2 className="met-header">Met (Artwork Display)</h2>
-            <div className="info-group">
-              <span className="label">Title:</span>
-              <p className="value">{journalData.artworkTitle}</p>
-            </div>
-            <div className="info-group">
-              <span className="label">Artist:</span>
-              <p className="value">{journalData.artistName}</p>
-            </div>
-            <p className="artwork-dispiye-text">a Artwork Display</p>
-          </div>
+      <section className="artwork-hero">
+        <div className="artwork-frame">
+          <img src={journalData.artworkImageUrl} alt={journalData.artworkTitle} />
         </div>
+      </section>
+
+      <article className="artwork-meta">
+        <h2 className="art-title">{journalData.artworkTitle}</h2>
+        <p className="art-artist">Artist: {journalData.artistName}</p>
+        <p className="art-description">
+          This selected piece from The Met collection echoes the essence of
+          <strong> {journalData.selectedTheme}</strong>. Its composition and history
+          offer a visual dialogue with your current inner state.
+        </p>
+      </article>
 
 
-        <div className="journal-details-section">
-          <div className="info-group pink-text">
-            <span className="label">Title:</span>
-            <p className="value">{journalData.journalTitle || "My Reflection"}</p>
-          </div>
-          <div className="info-group pink-text">
-            <span className="label">Artist:</span>
-            <p className="value">You</p>
-          </div>
-          <div className="info-group pink-text">
-            <span className="label">Medium:</span>
-            <p className="value">Digital Journal</p>
-          </div>
-
-          <div className="user-content-box">
-             <p>{journalData.content}</p>
-          </div>
+      <section className="reflection-journal">
+        <h3 className="journal-subtitle">Reflection Journal</h3>
+        <p className="journal-date">{today}</p>
+        <div className="journal-content">
+          {journalData.content}
         </div>
+      </section>
 
-        <div className="button-group">
+
+      <section className="button-group">
           <button className="action-btn primary">Save to My Gallery</button>
           <button className="action-btn secondary" onClick={onReset}>Return Home</button>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

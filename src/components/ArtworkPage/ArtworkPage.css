@@ -1,110 +1,101 @@
-.artwork-result-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: #4d4d5a;
+.artwork-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    background-color: #fcfcfc;
+    color: #2c3e50;
+    text-align: center;
 }
 
-.page-title {
-  font-size: 2.5rem;
-  margin-bottom: 5px;
+.theme-tag {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
 }
 
-/* .title-underline {
-  height: 3px;
-  background-color: #1a4a9e;
-  width: 60%;
-  margin: 0 auto 40px;
-} */
-
-.main-content-card {
-  border: 2px solid #89cff0;
-  padding: 30px;
-  border-radius: 10px;
-}
-
-
-.met-display-section {
-  display: flex;
-  gap: 30px;
-  border: 1px solid #89cff0;
-  padding: 20px;
-  margin-bottom: 30px;
-  align-items: center;
-}
-
-.art-frame {
-  flex: 1;
-  border: 10px solid #5d4037;
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
-}
-
-.art-frame img {
-  width: 100%;
-  display: block;
-}
-
-.art-details-sidebar {
-  flex: 1;
-  text-align: left;
-}
-
-.met-header {
-  color: #4db8ff;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    font-weight: 400;
 }
 
 
-.journal-details-section {
-  text-align: left;
-  margin-bottom: 40px;
+.artwork-hero {
+    margin-bottom: 60px;
 }
 
-.info-group {
-  display: flex;
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+.artwork-hero .frame {
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    padding: 20px;
+    background: white;
+    display: inline-block;
 }
 
-.label {
-  font-weight: bold;
-  margin-right: 10px;
-  min-width: 80px;
+.artwork-hero img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
-.pink-text {
-  color: #d170b2;
+
+.artwork-meta {
+    max-width: 600px;
+    margin: 0 auto 60px;
 }
 
-.user-content-box {
-  margin-top: 20px;
-  padding: 15px;
-  border-left: 2px dashed #ccc;
-  color: #555;
+.art-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 5px;
 }
 
-.button-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
+.art-artist {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 25px;
 }
 
-.action-btn {
-  margin-top: 30px;
-  padding: 18px;
-  border-radius: 12px;
-  border: none;
-  background-color: #4d4d5a;
-  color: white;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.divider {
+    width: 40px;
+    height: 2px;
+    background: #2c3e50;
+    margin: 0 auto 25px;
 }
 
-.action-btn:hover {
-  background-color: #1e1e20;
-  transform: translateY(-2px);
+.art-description {
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.1rem;
+}
+
+.user-reflection {
+    background: #f0f0f0;
+    padding: 40px;
+    border-radius: 4px;
+    margin-bottom: 60px;
+    font-style: italic;
+}
+
+.reflection-text {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.reset-btn {
+    background: none;
+    border: 1px solid #2c3e50;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.reset-btn:hover {
+    background: #2c3e50;
+    color: white;
 }
