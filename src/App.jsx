@@ -8,7 +8,6 @@ import LandingPage from './components/LandingPage/LandingPage';
 import JournalPage from './components/JournalPage/JournalPage';
 import ArtworkPage from './components/ArtworkPage/ArtworkPage';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080/api";
 
 function App() {
 
