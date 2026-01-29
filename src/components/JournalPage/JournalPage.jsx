@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
+import { journalService } from '../services/api';
 import './JournalPage.css';
+
 
 const JournalPage = ({ metaphor, onNext }) => {
   const [content, setContent] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = () => {
-    if (content.trim().length > 10) {
-      onNext(content);
+  const handleSubmit = async () => {
+    if (content.trim().length >= 10) {
+      setIsSubmitting(true);
+      try {
+        const artworkData = await journalService.createJournalEntry(metaphor.label, content);
+
+        onNext(content, artworkData);
+
+      } catch (error) {
+        alert("Failed to connect to the gallery. Please ensure the backend is running.");
+      } finally {
+        setIsSubmitting(false);
+      }
     } else {
-      alert("Please write a bit more about your feelings (at least 10 characters).");
+      alert("Please write at least 10 characters to express your feelings.");
     }
   };
 
+
   return (
     <div className="journal-container fade-in">
-    <header className="fade-in">
+      <header className="fade-in">
         <h1>Reflect & Release</h1>
         <p>Let your thoughts flow freely. There's no right or wrong way to express yourself.</p>
-    </header>
+      </header>
+
       <div className="journal-layout">
         <div className="visual-guide">
           <div
@@ -35,15 +50,16 @@ const JournalPage = ({ metaphor, onNext }) => {
             placeholder="Write down what's on your mind..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            disabled={isSubmitting}
           />
           <div className="word-count">{content.length} characters</div>
 
           <button
             className="submit-journal-btn"
             onClick={handleSubmit}
-            disabled={content.length < 10}
+            disabled={content.length < 10 || isSubmitting}
           >
-            Reveal My Art Connection
+            {isSubmitting ? "Connecting to Met API..." : "Reveal My Art Connection"}
           </button>
         </div>
       </div>
