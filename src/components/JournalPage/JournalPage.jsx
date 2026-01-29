@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { journalService } from '../services/api';
+import { journalService } from '../../services/api';
 import './JournalPage.css';
 
 
@@ -12,6 +12,7 @@ const JournalPage = ({ metaphor, onNext }) => {
       setIsSubmitting(true);
       try {
         const artworkData = await journalService.createJournalEntry(metaphor.label, content);
+        console.log("Full Response from Backend:", artworkData);
 
         onNext(content, artworkData);
 
