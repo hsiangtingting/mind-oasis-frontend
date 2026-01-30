@@ -28,11 +28,12 @@ const JournalPage = ({ metaphor, onNext }) => {
 
 
   return (
-    <div className="journal-container fade-in">
-      <header className="fade-in">
+    <div className="journal-container">
+      <div className="journal-header">
         <h1>Reflect & Release</h1>
-        <p>Let your thoughts flow freely. There's no right or wrong way to express yourself.</p>
-      </header>
+        <p>Let your thoughts flow freely. </p>
+        <p>There's no right or wrong way to express yourself.</p>
+      </div>
 
       <div className="journal-layout">
         <div className="visual-guide">

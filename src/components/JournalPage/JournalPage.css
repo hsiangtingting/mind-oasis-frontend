@@ -1,7 +1,7 @@
 .journal-container {
   max-width: 1100px;
-  margin: 50px auto;
-  padding: 20px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 .journal-layout {
@@ -9,6 +9,24 @@
   gap: 40px;
   align-items: flex-start;
   flex-wrap: wrap;
+}
+
+.journal-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.journal-header h1 {
+  font-size: 2.2rem;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.journal-header p {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .visual-guide {
