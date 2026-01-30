@@ -20,21 +20,15 @@ function App() {
     setStep(STEPS.JOURNAL);
   };
 
-  const handleJournalSubmit = async(content) => {
+  const handleJournalSubmit = (content, artworkData) => {
+    console.log("Saving API result to session:", artworkData);
 
-    console.log("Submitting to backend:", session.theme.id, content);
+    setSession({
+      ...session,
+      result: artworkData
+    });
 
-    const mockBackendResult = {
-      artworkImageUrl: session.theme.url,
-      artworkTitle: "Waiting for Met API connection...",
-      artistName: "Oasis Meditator",
-      artworkDate: "c. 2024",
-      content: content,
-      selectedTheme: session.theme.label
-  };
-
-    setSession({ ...session, result: mockBackendResult });
-    setStep(STEPS.ARTWORK);
+      setStep(STEPS.ARTWORK);
   };
 
   const handleReset = () => {
