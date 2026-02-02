@@ -4,7 +4,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080/api
 
 
 const apiClient = axios.create({
-    baseURL: `${API_BASE_URL}/api`,
+    baseURL: `${API_BASE_URL.replace(/\/$/, "")}/api`,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
