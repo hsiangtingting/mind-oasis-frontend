@@ -15,8 +15,10 @@ import { FiHome, FiUser, FiGrid } from 'react-icons/fi';
 function App() {
 
   const [step, setStep] = useState(STEPS.LANDING);
-
   const [session, setSession] = useState({ theme: null, result: null });
+  const [selectedJournal, setSelectedJournal] = useState(null);
+  const [viewingHistory, setViewingHistory] = useState(null);
+
 
   const handleThemeSelect = (theme) => {
     setSession({ ...session, theme: theme });
@@ -43,6 +45,21 @@ function App() {
     setStep(STEPS.GALLERY);
   };
 
+  const handleViewArtwork = (journalData) => {
+    setSelectedJournal(journalData);
+    setStep(STEPS.ARTWORK);
+  };
+
+  const handleViewHistory = (item) => {
+    setViewingHistory(item);
+    setStep(STEPS.ARTWORK);
+};
+
+  const handleBackToGallery = () => {
+    setViewingHistory(null);
+    setStep(STEPS.GALLERY);
+};
+
   return (
     <div className="App">
       <nav className="navbar">
@@ -64,7 +81,7 @@ function App() {
 
       <main className="content-area">
         {step === STEPS.GALLERY && (
-          <GalleryPage />
+          <GalleryPage onArtworkClick={handleViewHistory} />
         )}
 
         {step === STEPS.LANDING && (
@@ -79,7 +96,9 @@ function App() {
         )}
 
         {step === STEPS.ARTWORK && (
-          <ArtworkPage journalData={session.result} onReset={handleReset} />
+          <ArtworkPage
+          journalData={viewingHistory || session.result}
+          onReset={viewingHistory ? handleBackToGallery : handleReset} />
         )}
       </main>
 
