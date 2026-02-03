@@ -7,13 +7,14 @@ import { STEPS } from './constants/Steps';
 import LandingPage from './components/LandingPage/LandingPage';
 import JournalPage from './components/JournalPage/JournalPage';
 import ArtworkPage from './components/ArtworkPage/ArtworkPage';
+import GalleryPage from './components/GalleryPage/GalleryPage';
 
 import { FiHome, FiUser, FiGrid } from 'react-icons/fi';
 
 
 function App() {
 
-  const [step, setStep] = useState(STEPS.LANDING);
+  const [step, setStep] = useState(STEPS.GALLERY);
 
   const [session, setSession] = useState({ theme: null, result: null });
 
@@ -38,6 +39,10 @@ function App() {
     setStep(STEPS.LANDING);
   };
 
+  const handleGoToGallery = () => {
+    setStep(STEPS.GALLERY);
+  };
+
   return (
     <div className="App">
       <nav className="navbar">
@@ -47,7 +52,7 @@ function App() {
             <FiHome size={22} strokeWidth={1.1} />
           </button>
 
-          <button className="nav-icon-btn" title="Gallery">
+          <button className="nav-icon-btn" onClick={handleGoToGallery} title="Gallery">
             <FiGrid size={22} strokeWidth={1.1}/>
           </button>
 
@@ -58,6 +63,10 @@ function App() {
       </nav>
 
       <main className="content-area">
+        {step === STEPS.GALLERY && (
+          <GalleryPage />
+        )}
+
         {step === STEPS.LANDING && (
           <LandingPage
             selectedThemes={SELECTED_THEMES}
