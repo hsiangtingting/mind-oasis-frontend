@@ -8,6 +8,8 @@ import LandingPage from './components/LandingPage/LandingPage';
 import JournalPage from './components/JournalPage/JournalPage';
 import ArtworkPage from './components/ArtworkPage/ArtworkPage';
 
+import { FiHome, FiUser, FiGrid } from 'react-icons/fi';
+
 
 function App() {
 
@@ -40,6 +42,19 @@ function App() {
     <div className="App">
       <nav className="navbar">
         <div className="logo" onClick={handleReset}>Mind Oasis</div>
+        <div className="nav-links">
+          <button className="nav-icon-btn" onClick={handleReset} title="Home">
+            <FiHome size={22} strokeWidth={1.1} />
+          </button>
+
+          <button className="nav-icon-btn" title="Gallery">
+            <FiGrid size={22} strokeWidth={1.1}/>
+          </button>
+
+          <button className="nav-icon-btn" title="Account">
+            <FiUser size={22} strokeWidth={1.1} />
+          </button>
+        </div>
       </nav>
 
       <main className="content-area">
