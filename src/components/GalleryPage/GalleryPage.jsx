@@ -3,7 +3,7 @@ import './GalleryPage.css';
 
 
 
-const GalleryPage = () => {
+const GalleryPage = ({ onArtworkClick }) => {
     const [journals, setJournals] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -25,9 +25,8 @@ const GalleryPage = () => {
         fetchGallery();
     }, []);
 
-    const handleArtClick = (journalId) => {
-
-        window.open(`/artwork/${journalId}`, '_blank');
+    const handleArtClick = (item) => {
+        onArtworkClick(item);
     };
 
     if (isLoading) return <div className="loading-magazine">Reading Archive...</div>;
@@ -46,7 +45,7 @@ const GalleryPage = () => {
                     <article
                         key={item.id}
                         className={`magazine-item ${index % 3 === 0 ? 'wide' : 'standard'}`}
-                        onClick={() => handleArtClick(item.id)}
+                        onClick={() => handleArtClick(item)}
                     >
                         <div className="magazine-img-wrapper">
                             <img
