@@ -2,57 +2,32 @@ import React, { useState, useEffect } from 'react';
 import './GalleryPage.css';
 
 
-const MOCK_JOURNALS = [
-    {
-        id: 1,
-        artTitle: "The Starry Night",
-        artistName: "Vincent van Gogh",
-        artImageUrlSmall: "https://mind-oasis-assets-2026.s3.us-east-1.amazonaws.com/calm.jpg",
-        selectedTheme: "Calm",
-        journalContent: "This is how I felt today which was full of chaos but shining like stars.",
-        createdAt: "2026-02-01T10:00:00",
-        medium: "Oil on canvas"
-    },
-    {
-        id: 2,
-        artTitle: "Water Lilies",
-        artistName: "Claude Monet",
-        artImageUrlSmall: "https://mind-oasis-assets-2026.s3.us-east-1.amazonaws.com/growth.jpg",
-        selectedTheme: "Peaceful",
-        journalContent: "Found a peaceful moment by the water.",
-        createdAt: "2026-02-02T14:30:00",
-        medium: "Oil on canvas"
-    }
-];
-
 
 const GalleryPage = () => {
-    const [journals, setJournals] = useState(MOCK_JOURNALS);
-    const [isLoading, setIsLoading] = useState(false);
+    const [journals, setJournals] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log("Mock journals testing");
-        }, []);
-        // const fetchGallery = async () => {
 
-    //         try {
-    //             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/journals`);
-    //             if (!response.ok) throw new Error('Network response was not ok');
-    //             const data = await response.json();
-    //             setJournals(data);
-    //         } catch (error) {
-    //             console.error("Gallery fetch error:", error);
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     };
-    //     fetchGallery();
-    // }, []);
+        const fetchGallery = async () => {
+
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/journals`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                setJournals(data);
+            } catch (error) {
+                console.error("Gallery fetch error:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchGallery();
+    }, []);
 
     const handleArtClick = (journalId) => {
-        console.log("user click on journal:", journalId);
-        alert("clicked ID: " + journalId);
-        // window.open(`/artwork/${journalId}`, '_blank');
+
+        window.open(`/artwork/${journalId}`, '_blank');
     };
 
     if (isLoading) return <div className="loading-magazine">Reading Archive...</div>;

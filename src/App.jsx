@@ -14,7 +14,7 @@ import { FiHome, FiUser, FiGrid } from 'react-icons/fi';
 
 function App() {
 
-  const [step, setStep] = useState(STEPS.GALLERY);
+  const [step, setStep] = useState(STEPS.LANDING);
 
   const [session, setSession] = useState({ theme: null, result: null });
 
