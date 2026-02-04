@@ -1,111 +1,94 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
-import {SELECTED_THEMES} from './constants/SelectedThemes';
-import { STEPS } from './constants/Steps';
+import { SELECTED_THEMES } from './constants/SelectedThemes';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
 
+import Navbar from './components/Navbar/Navbar';
 import LandingPage from './components/LandingPage/LandingPage';
 import JournalPage from './components/JournalPage/JournalPage';
 import ArtworkPage from './components/ArtworkPage/ArtworkPage';
 import GalleryPage from './components/GalleryPage/GalleryPage';
-
-import { FiHome, FiUser, FiGrid } from 'react-icons/fi';
-
+import LoginPage from './components/Auth/LoginPage';
 
 function App() {
 
-  const [step, setStep] = useState(STEPS.LANDING);
   const [session, setSession] = useState({ theme: null, result: null });
-  const [selectedJournal, setSelectedJournal] = useState(null);
   const [viewingHistory, setViewingHistory] = useState(null);
 
 
-  const handleThemeSelect = (theme) => {
-    setSession({ ...session, theme: theme });
-    setStep(STEPS.JOURNAL);
-  };
-
-  const handleJournalSubmit = (content, artworkData) => {
-    console.log("Saving API result to session:", artworkData);
-
-    setSession({
-      ...session,
-      result: artworkData
-    });
-
-      setStep(STEPS.ARTWORK);
-  };
-
   const handleReset = () => {
     setSession({ theme: null, result: null });
-    setStep(STEPS.LANDING);
-  };
-
-  const handleGoToGallery = () => {
-    setStep(STEPS.GALLERY);
-  };
-
-  const handleViewArtwork = (journalData) => {
-    setSelectedJournal(journalData);
-    setStep(STEPS.ARTWORK);
-  };
-
-  const handleViewHistory = (item) => {
-    setViewingHistory(item);
-    setStep(STEPS.ARTWORK);
-};
-
-  const handleBackToGallery = () => {
     setViewingHistory(null);
-    setStep(STEPS.GALLERY);
-};
+  };
 
   return (
-    <div className="App">
-      <nav className="navbar">
-        <div className="logo" onClick={handleReset}>Mind Oasis</div>
-        <div className="nav-links">
-          <button className="nav-icon-btn" onClick={handleReset} title="Home">
-            <FiHome size={22} strokeWidth={1.1} />
-          </button>
+  <AuthProvider>
+    <Router>
+      <div className="App">
+        <Navbar onReset={handleReset} />
 
-          <button className="nav-icon-btn" onClick={handleGoToGallery} title="Gallery">
-            <FiGrid size={22} strokeWidth={1.1}/>
-          </button>
+        <main className="content-area">
+          <Routes>
 
-          <button className="nav-icon-btn" title="Account">
-            <FiUser size={22} strokeWidth={1.1} />
-          </button>
-        </div>
-      </nav>
+            <Route path="/login" element={<LoginPage />} />
 
-      <main className="content-area">
-        {step === STEPS.GALLERY && (
-          <GalleryPage onArtworkClick={handleViewHistory} />
-        )}
+            <Route
+              path="/"
+              element={
+                <LandingPage
+                  selectedThemes={SELECTED_THEMES}
+                  onSelectMetaphor={(theme) => setSession({ ...session, theme: theme })}
+                />
+              }
+            />
 
-        {step === STEPS.LANDING && (
-          <LandingPage
-            selectedThemes={SELECTED_THEMES}
-            onSelectMetaphor={handleThemeSelect}
-          />
-        )}
+            <Route
+              path="/journal"
+              element={
+                session.theme ? (
+                  <JournalPage
+                    metaphor={session.theme}
+                    onNext={(content, artworkData) => setSession({ ...session, result: artworkData })}
+                  />
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
 
-        {step === STEPS.JOURNAL && (
-          <JournalPage metaphor={session.theme} onNext={handleJournalSubmit} />
-        )}
+            <Route
+              path="/artwork"
+              element={
+                <ArtworkPage
+                  journalData={viewingHistory || session.result}
+                />
+              }
+            />
 
-        {step === STEPS.ARTWORK && (
-          <ArtworkPage
-          journalData={viewingHistory || session.result}
-          onReset={viewingHistory ? handleBackToGallery : handleReset} />
-        )}
-      </main>
+            <Route
+              path="/gallery"
+              element={
+                <ProtectedRoute>
+                <GalleryPage
+                  onArtworkClick={(item) => setViewingHistory(item)}
+                />
+                </ProtectedRoute>
+              }
+            />
 
-      <footer className="footer">
-        <p>© 2026 Mind Oasis Project | Built for Inner Peace</p>
-      </footer>
-    </div>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+
+        <footer className="footer">
+          <p>© 2026 Mind Oasis Project | Built for Inner Peace</p>
+        </footer>
+      </div>
+    </Router>
+  </AuthProvider>
   );
 }
 

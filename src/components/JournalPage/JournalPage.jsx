@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 import { journalService } from '../../services/api';
 import './JournalPage.css';
 
@@ -6,6 +7,7 @@ import './JournalPage.css';
 const JournalPage = ({ metaphor, onNext }) => {
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (content.trim().length >= 10) {
@@ -15,6 +17,7 @@ const JournalPage = ({ metaphor, onNext }) => {
         console.log("Full Response from Backend:", artworkData);
 
         onNext(content, artworkData);
+        navigate('/artwork');
 
       } catch (error) {
         alert("Failed to connect to the gallery. Please ensure the backend is running.");

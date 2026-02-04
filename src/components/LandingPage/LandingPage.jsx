@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 
 const LandingPage = ({ selectedThemes, onSelectMetaphor }) => {
     const [selectedId, setSelectedId] = useState(null);
+    const navigate = useNavigate();
 
     const handleNext = () => {
         if (selectedId) {
             const selected = selectedThemes.find(m => m.id === selectedId);
             onSelectMetaphor(selected);
+            navigate('/journal');
         }
     };
 

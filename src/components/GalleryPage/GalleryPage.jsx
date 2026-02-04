@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './GalleryPage.css';
 
 
@@ -6,6 +7,7 @@ import './GalleryPage.css';
 const GalleryPage = ({ onArtworkClick }) => {
     const [journals, setJournals] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -27,6 +29,7 @@ const GalleryPage = ({ onArtworkClick }) => {
 
     const handleArtClick = (item) => {
         onArtworkClick(item);
+        navigate('/artwork');
     };
 
     if (isLoading) return <div className="loading-magazine">Reading Archive...</div>;

@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ArtworkPage.css';
 
-const ArtworkPage = ({ journalData, onReset }) => {
+const ArtworkPage = ({ journalData}) => {
+  const navigate = useNavigate();
+
   if (!journalData) return <div className="loading">Seeking resonance...</div>;
 
   const today = new Date().toLocaleDateString('en-US', {
@@ -66,8 +69,10 @@ const ArtworkPage = ({ journalData, onReset }) => {
         </section>
 
         <section className="button-group">
-            <button className="action-btn primary">Save to Gallery</button>
-            <button className="action-btn secondary" onClick={onReset}>Start New Journey</button>
+            <button className="action-btn primary"
+              onClick={() => navigate('/gallery')}>Save to Gallery</button>
+            <button className="action-btn secondary"
+              onClick={() => navigate('/')}>Start New Journey</button>
         </section>
       </div>
     </div>
