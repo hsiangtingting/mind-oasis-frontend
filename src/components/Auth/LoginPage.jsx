@@ -16,12 +16,25 @@ const LoginPage = () => {
         e.preventDefault();
 
 
-        console.log("Logging in with:", email);
-        const mockUser = { name: "Explorer", email: email };
-        const mockToken = "fake-jwt-token";
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/signin`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
 
-        login(mockUser, mockToken);
-        navigate(from, { replace: true });
+            if (response.ok) {
+                const userData = await response.json();
+                login(userData, userData.uuid);
+                navigate(from, { replace: true });
+            } else {
+                const errorMsg = await response.text();
+                alert(errorMsg || "Invalid credentials");
+            }
+        } catch (error) {
+            console.error("Login failed:", error);
+            alert("Connection error. Is backend running?");
+        }
     };
 
     return (
@@ -42,7 +55,7 @@ const LoginPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit" className="login-btn">Enter Oasis</button>
+                <button type="submit" className="login-btn">Sign In</button>
             </form>
         </div>
     );

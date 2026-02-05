@@ -8,21 +8,29 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
 
-        const token = localStorage.getItem('token');
-        if (token) {
+        const storedToken = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
 
-            setUser({ token });
+        if (storedToken && storedUser) {
+            try {
+                setUser(JSON.parse(storedUser));
+            } catch (e) {
+                console.error("Failed to parse stored user", e);
+                localStorage.clear();
+            }
         }
         setLoading(false);
     }, []);
 
-    const login = (userData, token) => {
-        localStorage.setItem('token', token);
+    const login = (userData, uuid) => {
+        localStorage.setItem('token', uuid);
+        localStorage.setItem('user', JSON.stringify(userData));
         setUser(userData);
     };
 
     const logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setUser(null);
     };
 
