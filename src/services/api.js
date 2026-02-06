@@ -44,7 +44,6 @@ export const journalService = {
         }
     },
 
-
     getJournalsByUser: async () => {
         const uuid = localStorage.getItem('token');
         if (!uuid) throw new Error("Please login first");
@@ -53,6 +52,16 @@ export const journalService = {
             const response = await apiClient.get('/journals', {
                 params: { userUuid: uuid }
             });
+            return response.data;
+        } catch (error) {
+            handleApiError(error);
+            throw error;
+        }
+    },
+
+    deleteJournal: async (id) => {
+        try {
+            const response = await apiClient.delete(`/journals/${id}`);
             return response.data;
         } catch (error) {
             handleApiError(error);

@@ -33,6 +33,27 @@ const GalleryPage = ({ onArtworkClick }) => {
 
     if (isLoading) return <div className="loading-magazine">Reading Archive...</div>;
 
+    const handleDelete = async (e, id) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        // console.log("Current Item ID is:", id);
+
+        if (!window.confirm("Are you sure you want to delete this journal from your archive?")) return;
+
+        try {
+
+            await journalService.deleteJournal(id);
+            setJournals(prev => prev.filter(item => item.id !== id));
+            alert("Journal successfully deleted.");
+
+        } catch (error) {
+            console.error("Delete error:", error);
+            alert("Failed to delete the journal. Please try again.");
+        }
+    };
+
+
     return (
         <div className="magazine-gallery">
             <header className="magazine-header">
@@ -75,6 +96,13 @@ const GalleryPage = ({ onArtworkClick }) => {
                             <time className="meta-date">
                                 {new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                             </time>
+                            <button
+                                className="delete-button"
+                                onClick={(e) => handleDelete(e, item.id)}
+                                title="Delete this journal"
+                            >
+                                Delete
+                            </button>
                         </div>
                     </article>
                 ))}
