@@ -25,7 +25,9 @@ const LoginPage = () => {
 
             if (response.ok) {
                 const userData = await response.json();
-                login(userData, userData.uuid);
+                login(userData, userData.token);
+                localStorage.setItem('token', userData.token);
+
                 navigate(from, { replace: true });
             } else {
                 const errorMsg = await response.text();
