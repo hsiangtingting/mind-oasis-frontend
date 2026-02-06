@@ -84,14 +84,8 @@ const GalleryPage = ({ onArtworkClick }) => {
                         <div className="magazine-meta">
                             <span className="meta-category">{item.selectedTheme}</span>
                             <h2 className="meta-title">{item.artTitle}</h2>
-                            <p className="meta-excerpt">
-                                {item.journalContent ? (
-                                    item.journalContent.length > 60
-                                        ? `${item.journalContent.substring(0, 60)}...`
-                                        : item.journalContent
-                                ):(
-                                    "No reflection recorded."
-                                )}
+                            <p className="meta-excerpt artist-name">
+                                {item.artistName ? `By ${item.artistName}` : "Unknown Artist"}
                             </p>
                             <time className="meta-date">
                                 {new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
