@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080/api";
-
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const apiClient = axios.create({
     baseURL: `${API_BASE_URL.replace(/\/$/, "")}/api`,
@@ -22,16 +21,22 @@ const handleApiError = (error) => {
 };
 
 export const journalService = {
-    /**
-     * @param {string} theme
-     * @param {string} content
-     */
+
     createJournalEntry: async (theme, content) => {
+        const uuid = localStorage.getItem('token');
+
+        console.log("Submitting. Found Token:", uuid || "None (Guest Mode)");
+
         try {
-            const response = await apiClient.post('/journals', {
-                theme: theme,
-                content: content
-            });
+            const response = await apiClient.post('/journals',
+                {
+                    theme: theme,
+                    content: content
+                },
+                {
+                    params: { userUuid: uuid }
+                }
+            );
             return response.data;
         } catch (error) {
             handleApiError(error);
@@ -39,9 +44,15 @@ export const journalService = {
         }
     },
 
-    getAllJournals: async () => {
+
+    getJournalsByUser: async () => {
+        const uuid = localStorage.getItem('token');
+        if (!uuid) throw new Error("Please login first");
+
         try {
-            const response = await apiClient.get('/journals');
+            const response = await apiClient.get('/journals', {
+                params: { userUuid: uuid }
+            });
             return response.data;
         } catch (error) {
             handleApiError(error);

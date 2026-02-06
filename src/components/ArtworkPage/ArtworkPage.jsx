@@ -5,6 +5,8 @@ import './ArtworkPage.css';
 const ArtworkPage = ({ journalData}) => {
   const navigate = useNavigate();
 
+  console.log("ArtworkPage received data:", journalData);
+
   if (!journalData) return <div className="loading">Seeking resonance...</div>;
 
   const today = new Date().toLocaleDateString('en-US', {
@@ -23,7 +25,8 @@ const ArtworkPage = ({ journalData}) => {
 
       <section className="artwork-hero-full">
         <div className="artwork-frame-refined">
-          <img src={journalData.artImageUrl} alt={journalData.artTitle} />
+          <img src={journalData.artImageUrl}
+          alt={journalData.artTitle} />
         </div>
       </section>
 

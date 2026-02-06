@@ -13,7 +13,14 @@ const JournalPage = ({ metaphor, onNext }) => {
     if (content.trim().length >= 10) {
       setIsSubmitting(true);
       try {
-        const artworkData = await journalService.createJournalEntry(metaphor.label, content);
+
+        // const userUuid = localStorage.getItem('token');
+        // console.log("Submitting with UUID:", userUuid);
+
+        const artworkData = await journalService.createJournalEntry(
+          metaphor.label,
+          content,
+        );
         console.log("Full Response from Backend:", artworkData);
 
         onNext(content, artworkData);

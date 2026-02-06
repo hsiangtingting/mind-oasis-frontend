@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { journalService } from '../../services/api';
 import './GalleryPage.css';
-
 
 
 const GalleryPage = ({ onArtworkClick }) => {
@@ -14,9 +14,8 @@ const GalleryPage = ({ onArtworkClick }) => {
         const fetchGallery = async () => {
 
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/journals`);
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
+                const data = await journalService.getJournalsByUser();
+                console.log("Gallery fetched data:", data);
                 setJournals(data);
             } catch (error) {
                 console.error("Gallery fetch error:", error);
@@ -65,9 +64,13 @@ const GalleryPage = ({ onArtworkClick }) => {
                             <span className="meta-category">{item.selectedTheme}</span>
                             <h2 className="meta-title">{item.artTitle}</h2>
                             <p className="meta-excerpt">
-                                {item.journalContent.length > 60
-                                    ? `${item.journalContent.substring(0, 60)}...`
-                                    : item.journalContent}
+                                {item.journalContent ? (
+                                    item.journalContent.length > 60
+                                        ? `${item.journalContent.substring(0, 60)}...`
+                                        : item.journalContent
+                                ):(
+                                    "No reflection recorded."
+                                )}
                             </p>
                             <time className="meta-date">
                                 {new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
