@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import { journalService } from '../../services/api';
 import './JournalPage.css';
@@ -9,8 +9,36 @@ const JournalPage = ({ metaphor, onNext }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
+  const userIsLoggedIn = !!localStorage.getItem('token');
+
+  useEffect(() => {
+    const saved = localStorage.getItem('pending_journal');
+    if (saved) {
+      const { content: savedContent } = JSON.parse(saved);
+      setContent(savedContent);
+    }
+  }, []);
+
   const handleSubmit = async () => {
-    if (content.trim().length >= 10) {
+    if (content.trim().length < 10) {
+      alert("Please write at least 10 characters to express your feelings.");
+      return;
+    }
+
+    if (!userIsLoggedIn) {
+      const pendingData = {
+        content: content,
+        metaphorLabel: metaphor.label,
+        metaphorUrl: metaphor.url,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem('pending_journal', JSON.stringify(pendingData));
+
+      alert("Please sign in to reveal your art connection and save it to your gallery.");
+      navigate('/login');
+      return;
+    }
+
       setIsSubmitting(true);
       try {
 
@@ -21,7 +49,9 @@ const JournalPage = ({ metaphor, onNext }) => {
           metaphor.label,
           content,
         );
+
         console.log("Full Response from Backend:", artworkData);
+        localStorage.removeItem('pending_journal');
 
         onNext(content, artworkData);
         navigate('/artwork');
@@ -31,9 +61,6 @@ const JournalPage = ({ metaphor, onNext }) => {
       } finally {
         setIsSubmitting(false);
       }
-    } else {
-      alert("Please write at least 10 characters to express your feelings.");
-    }
   };
 
 
@@ -71,7 +98,8 @@ const JournalPage = ({ metaphor, onNext }) => {
             onClick={handleSubmit}
             disabled={content.length < 10 || isSubmitting}
           >
-            {isSubmitting ? "Connecting to Met API..." : "Reveal My Art Connection"}
+            {isSubmitting ? "Connecting to Met API..."
+            :(userIsLoggedIn ? "Reveal My Art Connection" : "Sign In to Reveal Art")}
           </button>
         </div>
       </div>
