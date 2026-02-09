@@ -12,6 +12,7 @@ import JournalPage from './components/JournalPage/JournalPage';
 import ArtworkPage from './components/ArtworkPage/ArtworkPage';
 import GalleryPage from './components/GalleryPage/GalleryPage';
 import LoginPage from './components/Auth/LoginPage';
+import SignUpPage from './components/Auth/SignUpPage';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Routes>
 
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
 
             <Route
               path="/"

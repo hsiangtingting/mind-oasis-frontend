@@ -58,6 +58,9 @@ const LoginPage = () => {
                     required
                 />
                 <button type="submit" className="login-btn">Sign In</button>
+                    <p style={{ marginTop: '10px', fontSize: '14px' }}>
+                        New here? <span onClick={() => navigate('/signup')} style={{ cursor: 'pointer', color: '#007bff' }}>Create an account</span>
+                    </p>
             </form>
         </div>
     );
