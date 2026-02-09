@@ -28,7 +28,11 @@ const LoginPage = () => {
                 login(userData, userData.token);
                 localStorage.setItem('token', userData.token);
 
-                navigate(from, { replace: true });
+                if (localStorage.getItem('pending_journal')) {
+                    navigate('/journal', {replace: true});
+                } else {
+                    navigate(from, { replace: true });
+                }
             } else {
                 const errorMsg = await response.text();
                 alert(errorMsg || "Invalid credentials");
