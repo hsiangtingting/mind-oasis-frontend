@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import { journalService } from '../../services/api';
 import './JournalPage.css';
@@ -54,12 +54,11 @@ const JournalPage = ({ metaphor, onNext }) => {
         localStorage.removeItem('pending_journal');
 
         onNext(content, artworkData);
-        navigate('/artwork');
+        navigate('/artwork', { replace: true });
 
       } catch (error) {
-        alert("Failed to connect to the gallery. Please ensure the backend is running.");
-      } finally {
         setIsSubmitting(false);
+        alert("Failed to connect to the gallery. Please ensure the backend is running.");
       }
   };
 
