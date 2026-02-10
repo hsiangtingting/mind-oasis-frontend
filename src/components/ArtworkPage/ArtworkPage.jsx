@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ArtworkPage.css';
 
 const ArtworkPage = ({ journalData}) => {
   const navigate = useNavigate();
+  const [displayData, setDisplayData] = useState(null);
 
-  console.log("ArtworkPage received data:", journalData);
+  useEffect(() => {
+    console.log("ArtworkPage detected data update:", journalData);
+    if (journalData) {
+      setDisplayData(journalData);
+    }
+  }, [journalData]);
 
-  if (!journalData) return <div className="loading">Seeking resonance...</div>;
+  if (!displayData) return <div className="loading">Seeking resonance...</div>;
 
   const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -25,25 +31,25 @@ const ArtworkPage = ({ journalData}) => {
 
       <section className="artwork-hero-full">
         <div className="artwork-frame-refined">
-          <img src={journalData.artImageUrl}
-          alt={journalData.artTitle} />
+          <img src={displayData.artImageUrl}
+          alt={displayData.artTitle} />
         </div>
       </section>
 
       <div className="magazine-content-wrapper">
         <article className="artwork-meta-v">
           <div className="meta-label">Curator's Selection</div>
-          <h2 className="art-title">{journalData.artTitle}</h2>
+          <h2 className="art-title">{displayData.artTitle}</h2>
 
           <div className="art-info-stack">
             <p className="art-artist">
-              {journalData.artistName || "Unknown Artist"}
-              <span className="art-date">, {journalData.objectDate}</span>
+              {displayData.artistName || "Unknown Artist"}
+              <span className="art-date">, {displayData.objectDate}</span>
             </p>
 
-            {journalData.objectURL && (
+            {displayData.objectURL && (
               <div className="art-link-wrapper">
-                <a href={journalData.objectURL} target="_blank" rel="noopener noreferrer" className="met-link-refined">
+                <a href={displayData.objectURL} target="_blank" rel="noopener noreferrer" className="met-link-refined">
                   View on Met Museum Official Website →
                 </a>
               </div>
@@ -51,13 +57,13 @@ const ArtworkPage = ({ journalData}) => {
           </div>
 
           <div className="art-specs-row">
-            <span><strong>Medium:</strong> {journalData.medium || "N/A"}</span>
+            <span><strong>Medium:</strong> {displayData.medium || "N/A"}</span>
             <span className="spec-divider"> | </span>
-            <span><strong>Culture:</strong> {journalData.culture || "N/A"}</span>
+            <span><strong>Culture:</strong> {displayData.culture || "N/A"}</span>
           </div>
 
           <div className="art-credit-line-refined">
-            <p>{journalData.creditLine}</p>
+            <p>{displayData.creditLine}</p>
           </div>
         </article>
 
@@ -67,7 +73,7 @@ const ArtworkPage = ({ journalData}) => {
             <p className="journal-date">{today}</p>
           </div>
           <div className="journal-content-v">
-            {journalData.content || journalData.journalContent || "No reflection recorded for this journey."}
+            {displayData.content || displayData.journalContent || "No reflection recorded for this journey."}
           </div>
         </section>
 

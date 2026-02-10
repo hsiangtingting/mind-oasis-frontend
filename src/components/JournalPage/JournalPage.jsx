@@ -51,11 +51,16 @@ const JournalPage = ({ metaphor, onNext }) => {
         );
 
         console.log("Full Response from Backend:", artworkData);
-        localStorage.removeItem('pending_journal');
 
-        onNext(content, artworkData);
-        navigate('/artwork', { replace: true });
+        if (artworkData) {
+          localStorage.removeItem('pending_journal');
 
+          onNext(content, artworkData);
+
+          setTimeout(() => {
+          navigate('/artwork', { replace: true });
+          }, 100);
+        }
       } catch (error) {
         setIsSubmitting(false);
         alert("Failed to connect to the gallery. Please ensure the backend is running.");
